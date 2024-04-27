@@ -48,11 +48,14 @@ class AreaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('Identification')
-                    ->required()
-                    ->maxLength(255),
+                ->required()
+                ->maxLength(255)
+                ->placeholder('Ingrese su identificación'),
+
                 Forms\Components\TextInput::make('Name')
                     ->required()
                     ->maxLength(510),
+                    //->placeholder('Ingrese su nombre'),
                 /*
                 Forms\Components\Hidden::make('UserName') // Campo oculto para el nombre del usuario
                     ->defaultView($userId) */// Establecer el valor predeterminado del campo
