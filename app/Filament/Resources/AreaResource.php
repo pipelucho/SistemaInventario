@@ -50,12 +50,12 @@ class AreaResource extends Resource
                 Forms\Components\TextInput::make('Identification')
                 ->required()
                 ->maxLength(255)
-                ->placeholder('Ingrese su identificación'),
+                ->placeholder('Ingrese Nº Identificacion área'),
 
                 Forms\Components\TextInput::make('Name')
                     ->required()
-                    ->maxLength(510),
-                    //->placeholder('Ingrese su nombre'),
+                    ->maxLength(510)
+                    ->placeholder('Ingrese Nombre del área'),
                 /*
                 Forms\Components\Hidden::make('UserName') // Campo oculto para el nombre del usuario
                     ->defaultView($userId) */// Establecer el valor predeterminado del campo
