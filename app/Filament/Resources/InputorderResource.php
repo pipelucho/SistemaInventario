@@ -102,6 +102,10 @@ class InputorderResource extends Resource
                 Tables\Columns\TextColumn::make('RequieredDate')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('Fk_OrderBC')
+                    ->numeric()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
