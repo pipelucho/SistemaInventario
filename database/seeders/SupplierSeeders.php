@@ -16,7 +16,11 @@ class SupplierSeeders extends Seeder
     public function run(): void
     {
         //
-        Supplier::class::factory(5)->create();
+        //Supplier::class::factory(5)->create();
+        Supplier::class::create([
+            'Identification' => 'Ninguna',
+            'Name' => 'Ninguno',
+        ]);
 
     }
 }

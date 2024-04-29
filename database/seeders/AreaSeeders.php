@@ -17,16 +17,9 @@ class AreaSeeders extends Seeder
     {
         //
         Area::class::create([
-            'name' => 'Sistemas',
-        ]);
-        Area::class::create([
-            'name' => 'Gestión Humana',
-        ]);
-        Area::class::create([
-            'name' => 'SIG',
-        ]);
-        Area::class::create([
-            'name' => 'Planeación',
+            'Name' => 'Ninguna',
+            'Identification' => '0',
+
         ]);
     }
 }

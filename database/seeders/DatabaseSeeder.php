@@ -16,10 +16,12 @@ class DatabaseSeeder extends Seeder
         $this -> call([
 
                         UserSeeders::class,
-                        //AreaSeeders::class,
+                        AreaSeeders::class,
                         //EmployeeSeeders::class,
-                        //SupplierSeeders::class,
-                        //ProductSeeders::class,
+                        SupplierSeeders::class,
+                        ProductSeeders::class,
+                        QuoteSeeders::class,
+
 
 
 

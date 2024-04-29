@@ -5,10 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Product;
+use App\Models\Quote;
 
-
-class ProductSeeders extends Seeder
+class QuoteSeeders extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +15,12 @@ class ProductSeeders extends Seeder
     public function run(): void
     {
         //
-        //Product::class::factory(50)->create();
-        Product::class::create([
-            'UnitMeasurement' => 'Ninguna',
-            'Name' => 'Ninguno',
+        Quote::class::create([
+            'IdArea' => 1,
+            'Quantity' => 0,
+            'UnitMeasurement' => 'UND',
+            'IdProduct' => 1,
+            'IdSupplier' => 1,
         ]);
     }
 }

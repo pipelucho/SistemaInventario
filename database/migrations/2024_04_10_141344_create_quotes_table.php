@@ -17,7 +17,7 @@ return new class extends Migration
             //$table->integer('IdSupplier');
             //$table->integer('IdProduct');
             $table->datetime('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->datetime('RequieredDate');
+            $table->datetime('RequieredDate')->nullable();;
             $table->decimal('Quantity',10,2);
             $table->string('UnitMeasurement');
             $table->string('Description')->nullable();//Concatenar IdProduct-IdQuote-description
