@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('UnitMeasurement');
             $table->string('Description')->nullable();//Concatenar IdProduct-IdQuote-description
             // el siguiente es el identificador de la orden desde el businness central
-            $table->bigInteger('Fk_OrderBC')->nullable();
+            $table->string('Fk_DocumentNoBC')->nullable();
+            $table->bigInteger('Fk_LineNoBC')->nullable();
            // Crea atributo de llave foránea
             $table->foreignId('IdProduct')->constrained('products')->cascadeOnUpdate()->cascadeOnDelete();
            // Crea atributo de llave foránea
