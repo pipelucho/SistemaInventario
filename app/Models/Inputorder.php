@@ -9,7 +9,7 @@ class Inputorder extends Model
 {
     use HasFactory;
     //lo siguiente es para poner los datos editables del formulario
-    protected $fillable = ['IdSupplier','IdProduct','Quantity','UnitMeasurement','IdQuote','IdArea','OrderDate']; //datos editables
+    protected $fillable = ['IdSupplier','IdProduct','Quantity','UnitMeasurement','IdQuote','IdArea','OrderDate','Status','Description']; //datos editables
 
 
     public function products() //es para la relacion , en este caso product es la tabla donde se relaciona

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
                         UserSeeders::class,
                         AreaSeeders::class,
-                        //EmployeeSeeders::class,
+                        EmployeeSeeders::class,
                         SupplierSeeders::class,
                         ProductSeeders::class,
                         QuoteSeeders::class,

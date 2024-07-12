@@ -49,9 +49,12 @@ class InputorderResource extends Resource
                 Forms\Components\TextInput::make('UnitMeasurement')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('Description')
+                    //->required()
+                    ->maxLength(255),
                 Forms\Components\Select::make('IdProduct')
                     ->relationship('products','Name')
-                    ->required()
+                    //->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\Select::make('IdSupplier')
@@ -66,6 +69,8 @@ class InputorderResource extends Resource
                     ->required()
                     ->searchable()
                     ->preload(),
+                Forms\Components\Toggle::make('Status')
+                    ->required(),
             ]);
     }
 
@@ -73,6 +78,9 @@ class InputorderResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\IconColumn::make('Status')
+                    ->sortable()
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('areas.Name')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -90,6 +98,10 @@ class InputorderResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('suppliers.Name')
                     ->numeric()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('QuoteDate')
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('OrderDate')
@@ -121,6 +133,13 @@ class InputorderResource extends Resource
             ])->defaultSort('id', 'desc')
             ->filters([
                 //
+                SelectFilter::make('Status')
+                    ->label('Estado')
+                    ->options([
+                        1 => 'True',  // 1 representa true en booleano
+                        0 => 'False'  // 0 representa false en booleano
+                    ])
+                    ->default(null),
                 SelectFilter::make('IdArea')
                     ->label('Área')
                     ->multiple()
@@ -173,6 +192,7 @@ class InputorderResource extends Resource
         return [
             'index' => Pages\ListInputorders::route('/'),
             'create' => Pages\CreateInputorder::route('/create'),
+            //'edit' => Pages\EditInputorder::route('/{record}/edit'),
             'edit' => Pages\EditInputorder::route('/{record}/edit'),
         ];
     }
