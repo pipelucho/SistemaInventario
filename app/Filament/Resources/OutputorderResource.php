@@ -38,14 +38,20 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class OutputorderResource extends Resource
 {
     protected static ?string $model = Outputorder::class;
+    protected static ?string $modelLabel = 'salida';
+    protected static ?string $pluralModelLabel = 'salidas';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-up-on-square';
+    protected static ?string $navigationLabel = 'SALIDA';
+    protected static ?string $navigationGroup = 'Pedidos';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('IdArea')
+                    ->label('Área')
                     ->relationship('areas','Name')
                     ->required()
                     ->searchable()
@@ -57,17 +63,21 @@ class OutputorderResource extends Resource
                     ->required()
                     ->numeric(),*/
                 Forms\Components\TextInput::make('Quantity')
+                    ->label('Cantidad')
                     ->required()
                     ->numeric()
                     ->rules('required', 'numeric', new CheckStockQuantity),                  
                 Forms\Components\TextInput::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->maxLength(255),
                 Forms\Components\Select::make('IdProduct')
+                    ->label('Producto')
                     ->relationship('products','Name')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\Select::make('IdEmployee')
+                    ->label('Empleado')
                     ->relationship('employees','Name')
                     ->required()
                     ->searchable()
@@ -80,9 +90,11 @@ class OutputorderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('areas.Name')
+                    ->label('Área')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('products.Name')
+                    ->label('Producto')
                     ->searchable()
                     ->sortable(),
                     /*
@@ -91,24 +103,31 @@ class OutputorderResource extends Resource
                     ->sortable(),*/
                 
                 Tables\Columns\TextColumn::make('Quantity')
+                    ->label('Cantidad')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('EstimatedDurability')
+                    ->label('Durabilidad Estimada')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('employees.Name')
+                    ->label('Empleado')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('CreatedDate')
+                    ->label('Fecha de Pedido')
                     ->dateTime()
                     ->sortable(),                    
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha Creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha Actualización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -125,6 +144,7 @@ class OutputorderResource extends Resource
                     ->searchable()
                     ->default(null),
                 Filter::make('created_at')
+                    ->label('Fecha Creación')
                     ->form([
                         DatePicker::make('created_from')->label('Entregado Desde'),
                         DatePicker::make('created_until')->label('Entregado Hasta'),

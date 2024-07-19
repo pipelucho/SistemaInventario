@@ -28,8 +28,13 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class StockResource extends Resource
 {
     protected static ?string $model = Stock::class;
+    protected static ?string $modelLabel = 'inventario';
+    protected static ?string $pluralModelLabel = 'inventarios';
+    protected static ?string $navigationIcon = '';
+    protected static ?string $navigationLabel = 'STOCK';
+    protected static ?string $navigationGroup = 'Inventarios';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
 
     public static function form(Form $form): Form
     {
@@ -37,19 +42,23 @@ class StockResource extends Resource
             ->schema([
                 
                 Forms\Components\Select::make('IdArea')
+                    ->label('Área')
                     ->relationship('areas','Name')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\Select::make('IdProduct')
+                    ->label('Producto')
                     ->relationship('products','Name')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\TextInput::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('IsActive')
+                    ->label('Activo')
                     ->required(),
             ]);
     }
@@ -59,28 +68,35 @@ class StockResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\IconColumn::make('IsActive')
+                    ->label('Activo')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('areas.Name')
+                    ->label('Área')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('products.Name')
+                    ->label('Producto')
                     ->searchable()
                     ->sortable(),                            
                 Tables\Columns\TextColumn::make('Quantity')
+                    ->label('Cantidad')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('EstimatedDurability')
+                    ->label('Durabilidad Estimada')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true), 
                 Tables\Columns\TextColumn::make('products.LeadTime')
-                    ->label('Lead Time')
+                    ->label('Tiempo de entrega')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Status')
+                    ->label('Estado')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Pedir' => 'info',
@@ -92,10 +108,12 @@ class StockResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha de Creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha de Actualización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

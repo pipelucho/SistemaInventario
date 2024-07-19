@@ -28,8 +28,14 @@ use App\Models\Area;
 class QuoteResource extends Resource
 {
     protected static ?string $model = Quote::class;
+    protected static ?string $modelLabel = 'cotización';
+    protected static ?string $pluralModelLabel = 'cotizaciones';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static ?string $navigationLabel = 'COTIZACIÓN';
+    protected static ?string $navigationGroup = 'Pedidos';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    
+
 
     public static function form(Form $form): Form
     {
@@ -39,17 +45,21 @@ class QuoteResource extends Resource
                 Forms\Components\DateTimePicker::make('CreatedDate')
                     ->required(),*/
                 Forms\Components\Select::make('IdArea')
+                    ->label('Área')
                     ->relationship('areas','Name')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\TextInput::make('Quantity')
+                    ->label('Cantidad')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('IdProduct')
+                    ->label('Producto')
                     ->relationship('products','Name')
                     ->required()
                     ->searchable()
@@ -59,8 +69,10 @@ class QuoteResource extends Resource
                     ->required()
                     ->maxLength(510),*/
                 Forms\Components\DateTimePicker::make('RequieredDate')
+                    ->label('Fecha Requerida')
                     ->required(),
                 Forms\Components\Select::make('IdSupplier')
+                    ->label('Proveedor')
                     ->relationship('suppliers','Name')
                     ->required()
                     ->searchable()
@@ -73,11 +85,14 @@ class QuoteResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('areas.Name')
+                    ->label('Áreas')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('products.Name')
+                    ->label('Productos')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Description')
+                    ->label('Descripción')
                     ->label('Descripción Producto Pedido')
                     ->searchable()
                     ->color('success')
@@ -85,37 +100,44 @@ class QuoteResource extends Resource
                     ->copyMessage('Copiado al portapapeles.')
                     ->copyMessageDuration(1500),
                 Tables\Columns\TextColumn::make('Quantity')
+                    ->label('Cantidad')
                     ->numeric()
                     ->sortable()
                     ->copyable()
                     ->copyMessage('Copiado al portapapeles.')
                     ->copyMessageDuration(1500),
                 Tables\Columns\TextColumn::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->searchable()->copyable()
                     ->copyMessage('Copiado al portapapeles.')
                     ->copyMessageDuration(1500),
 
                 Tables\Columns\TextColumn::make('suppliers.Name')
+                    ->label('Proveedor')
                     ->sortable()
                     ->copyable()
                     ->copyMessage('Copiado al portapapeles.')
                     ->copyMessageDuration(1500),
                 
                 Tables\Columns\TextColumn::make('RequieredDate')
+                    ->label('Fecha Requerida')
                     ->dateTime()
                     ->sortable(),
 
                 
 
                 Tables\Columns\TextColumn::make('CreatedDate')
+                    ->label('Fecha Cotización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha Creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha Actualización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -132,6 +154,7 @@ class QuoteResource extends Resource
                     ->searchable()
                     ->default(null),
                 Filter::make('created_at')
+                    ->label('Fecha de creación')
                     ->form([
                         DatePicker::make('created_from')->label('Recibido Desde'),
                         DatePicker::make('created_until')->label('Recibido Hasta'),

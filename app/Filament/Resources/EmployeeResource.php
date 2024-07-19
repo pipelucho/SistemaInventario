@@ -17,16 +17,25 @@ class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'empleado';
+    protected static ?string $pluralModelLabel = 'empleados';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?string $navigationLabel = 'EMPLEADO';
+    protected static ?string $navigationGroup = 'Personas';
+
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('Identification')
+                    ->label('Identificación')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('Name')
+                    ->label('Nombre')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -37,14 +46,18 @@ class EmployeeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('Identification')
+                    ->label('Identificación')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Name')
+                    ->label('Nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha de creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha de modificación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

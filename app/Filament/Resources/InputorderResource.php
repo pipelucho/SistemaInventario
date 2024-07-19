@@ -32,44 +32,59 @@ class InputorderResource extends Resource
 {
     protected static ?string $model = Inputorder::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'entrada';
+    protected static ?string $pluralModelLabel = 'entradas';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-down-on-square';
+    protected static ?string $navigationLabel = 'ENTRADA';
+    protected static ?string $navigationGroup = 'Pedidos';
+
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('IdArea')
+                    ->label('Área')
                     ->relationship('areas','Name')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\TextInput::make('Quantity')
+                    ->label('Cantidad')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('Description')
+                    ->label('Descripción')
                     //->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('IdProduct')
+                    ->label('Producto')
                     ->relationship('products','Name')
                     //->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\Select::make('IdSupplier')
+                    ->label('Proveedor')
                     ->relationship('suppliers','Name')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\DateTimePicker::make('OrderDate')
+                    ->label('Fecha de Pedido')
                     ->required(),
                 Forms\Components\Select::make('IdQuote')
+                    ->label('Cotización')
                     ->relationship('quotes','Description')
                     ->required()
                     ->searchable()
                     ->preload(),
                 Forms\Components\Toggle::make('Status')
+                    ->label('Estado')
                     ->required(),
             ]);
     }
@@ -79,53 +94,68 @@ class InputorderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\IconColumn::make('Status')
+                    ->label('Estado')
                     ->sortable()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('areas.Name')
+                    ->label('Área')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 
                 Tables\Columns\TextColumn::make('Quantity')
+                    ->label('Cantidad')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Description')
+                    ->label('Descripción')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('products.Name')
+                    ->label('Producto')
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('suppliers.Name')
+                    ->label('Proveedor')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('QuoteDate')
+                    ->label('Fecha de cotización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('OrderDate')
+                    ->label('Fecha de Pedido')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('ReceivedDate')
+                    ->label('Fecha Recibido')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('RequieredDate')
+                    ->label('Fecha Requerido')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('Fk_DocumentNoBC')
+                    ->label('Nº Documento')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Fk_LineNoBC')
+                    ->label('Nº Linea')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha actualización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -150,6 +180,7 @@ class InputorderResource extends Resource
                     ->searchable()
                     ->default(null),
                 Filter::make('created_at')
+                    ->label('Fecha creación')
                     ->form([
                         DatePicker::make('created_from')->label('Recibido Desde'),
                         DatePicker::make('created_until')->label('Recibido Hasta'),

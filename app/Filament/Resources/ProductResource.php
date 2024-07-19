@@ -17,31 +17,31 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'producto';
+    protected static ?string $pluralModelLabel = 'productos';
+
+    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
+    
+
+    protected static ?string $navigationLabel = 'PRODUCTO';
+    protected static ?string $navigationGroup = 'Inventarios';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('Name')
+                    ->label('Nombre')
+                    ->translateLabel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('LeadTime')
+                    ->label('Tiempo de entrega')
                     ->required() 
                     ->numeric(),
-                    /*
-                Forms\Components\TextInput::make('EstimatedDurability')
-                    ->required()
-                    ->numeric(),
-                
-                Forms\Components\TextInput::make('Status')
-                    ->required()
-                    ->maxLength(510),
-                Forms\Components\TextInput::make('Quantity')
-                    ->required()
-                    ->numeric(),
-                    */
                 Forms\Components\TextInput::make('UnitMeasurement')
+                    ->label('Unidad de Medida')
                     ->required()
                     ->maxLength(255),
                 
@@ -53,20 +53,25 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('Name')
+                    ->label('Nombre')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('LeadTime')
+                    ->label('Tiempo de entrega')
                     ->numeric()
                     ->sortable(),
                 
                 Tables\Columns\TextColumn::make('UnitMeasurement')
+                    ->label('Unidad de medida')
                     ->searchable(),
                 
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha de creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha de actualización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

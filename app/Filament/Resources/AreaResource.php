@@ -23,8 +23,13 @@ use App\Models\User;
 class AreaResource extends Resource
 {
     protected static ?string $model = Area::class;
+    protected static ?string $modelLabel = 'área';
+    protected static ?string $pluralModelLabel = 'áreas';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    protected static ?string $navigationLabel = 'ÁREA';
+    protected static ?string $navigationGroup = 'Inventarios';
+
 
 /*
     public static function form(Form $form): Form
@@ -48,11 +53,13 @@ class AreaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('Identification')
+                ->label('Identificación')
                 ->required()
                 ->maxLength(255)
-                ->placeholder('Ingrese Nº Identificacion área'),
+                ->placeholder('Ingrese Nº Identificación área'),
 
                 Forms\Components\TextInput::make('Name')
+                    ->label('Nombre')
                     ->required()
                     ->maxLength(510)
                     ->placeholder('Ingrese Nombre del área'),
@@ -67,14 +74,18 @@ class AreaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('Identification')
+                    ->label('Identificación')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Name')
+                    ->label('Nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha modificación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
